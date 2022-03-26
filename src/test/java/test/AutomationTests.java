@@ -91,12 +91,11 @@ public class AutomationTests extends BaseTest {
         Assert.assertTrue(automationHomeSignIn.welcomeTextIsDIsplay());
         Assert.assertEquals("Welcome back, Lidija!", automationHomeSignIn.welcomeTextIsGet());
         automationHomeSignIn.setSearchField();
-        automationSearch.clickItemsTag()
-                        .clickFavoritesItem()
-                        .clickFavoritesItemsList();
+        automationSearch.addFavoriteIcon();
+        automationSearch.clickFavoritesItemsList();
         js.executeScript("window.scrollBy(0,150)");
         Assert.assertTrue(automationItemsFav.itemsColectionIsDisplay());
-        Assert.assertEquals("Favorite items", automationItemsFav.itemsColectionIsGetText());
+        Assert.assertEquals("Favourite items", automationItemsFav.itemsColectionIsGetText());
         js.executeScript("window.scrollBy(0,-150)");
         automationHomeSignIn.clickAccountButton()
                             .clickSignOutButton();

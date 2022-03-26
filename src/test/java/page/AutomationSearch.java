@@ -1,7 +1,9 @@
 package page;
 
 import base.BaseTest;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -10,6 +12,10 @@ public class AutomationSearch extends BaseTest {
     public AutomationSearch(){
         PageFactory.initElements(driver, this);
     }
+
+    private static final By classLink = By.xpath("(//li[@class=\"wt-list-unstyled wt-grid__item-xs-6 wt-grid__item-md-4 wt-grid__item-lg-3 wt-order-xs-0 wt-order-md-0 wt-order-lg-0 wt-show-xs wt-show-md wt-show-lg\"])[2]");
+    private static final By favoriteLink = By.xpath("(//div[@class=\"favorite-listing-button-icon-container should-animate \"])[2]");
+
 
     @FindBy(xpath = "//span[@class=\"wt-hide-xs wt-show-md filter-expander\"]")
     WebElement allfiltersButton;
@@ -29,6 +35,16 @@ public class AutomationSearch extends BaseTest {
     WebElement favoritesItem;
     @FindBy(xpath = "//span[@class=\"wt-tooltip wt-tooltip--disabled-touch\"]")
     WebElement favoritesItemsList;
+
+    public void addFavoriteIcon(){
+        WebElement clickClassLink = driver.findElement(classLink);
+        wdwait.until(ExpectedConditions.elementToBeClickable(classLink));
+        WebElement clickFavoriteLink = driver.findElement(favoriteLink);
+        Actions hoverFavorite = new Actions(driver);
+        hoverFavorite.moveToElement(clickClassLink);
+        hoverFavorite.moveToElement(clickFavoriteLink);
+        hoverFavorite.click().build().perform();
+    }
 
     public void clickFavoritesItemsList(){
         wdwait.until(ExpectedConditions.elementToBeClickable(favoritesItemsList));
